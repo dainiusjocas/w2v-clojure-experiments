@@ -27,3 +27,5 @@
   (.fit model))
 
 (defn vector-matrix [model word] (.getWordVectorMatrix model word))
+
+(defn nearest [model word] (.wordsNearest model word 10))
