@@ -1,6 +1,7 @@
 (ns w2v.core
   (:require [clojure.string :as string]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [opennlp.nlp :as nlp])
   (:import [org.deeplearning4j.text.sentenceiterator BasicLineIterator]
            [org.deeplearning4j.models.word2vec Word2Vec$Builder]
            [org.deeplearning4j.text.tokenization.tokenizer.preprocessor CommonPreprocessor]
@@ -10,6 +11,8 @@
            [org.nd4j.linalg.api.buffer DataBuffer$Type]
            [org.datavec.api.util ClassPathResource]
            [org.deeplearning4j.plot BarnesHutTsne$Builder]))
+
+(def get-sentences (nlp/make-sentence-detector (io/resource "lt-sent.bin")))
 
 (defn get-model []                                              ;; `vec` in the original Java
   (-> (Word2Vec$Builder.)
